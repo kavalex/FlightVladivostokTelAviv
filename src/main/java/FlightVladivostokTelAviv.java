@@ -50,7 +50,7 @@ public class FlightVladivostokTelAviv {
         System.out.println();
         System.out.println("Перелет Владивосток - Тель-Авив");
         System.out.println("-------------------------------");
-        System.out.println("1. Cреднее время: " + averageFlightTime.getAsDouble() + " минут");
+        System.out.println("1. Среднее время: " + averageFlightTime.getAsDouble() + " минут");
         System.out.println("2. " + percentile + "-й процентиль: " + percentileFlightTime);
         System.out.println("-------------------------------");
     }
