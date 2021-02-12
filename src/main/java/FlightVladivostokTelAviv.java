@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.OptionalDouble;
 
@@ -33,6 +34,10 @@ public class FlightVladivostokTelAviv {
                 LocalDateTime arrival = getLocalDateTime(ticketNode, "arrival_date", "arrival_time", formatter);
                 flightTime.add(Duration.between(departure, arrival).toMinutes());
             }
+            Collections.sort(flightTime);
+            for(Long counter: flightTime){
+                System.out.println(counter);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -46,12 +51,12 @@ public class FlightVladivostokTelAviv {
 
     private static void output() {
         OptionalDouble averageFlightTime = flightTime.stream().mapToLong(e -> e).average();
-        float percentileFlightTime = ((float) percentile/100)*flightTime.size();
+        int percentileFlightTime = (int) Math.round(((float) percentile/100)*flightTime.size());
         System.out.println();
         System.out.println("Перелет Владивосток - Тель-Авив");
         System.out.println("-------------------------------");
         System.out.println("1. Среднее время: " + averageFlightTime.getAsDouble() + " минут");
-        System.out.println("2. " + percentile + "-й процентиль: " + percentileFlightTime);
+        System.out.println("2. " + percentile + "-й процентиль: " + flightTime.get(percentileFlightTime - 1));
         System.out.println("-------------------------------");
     }
 }
